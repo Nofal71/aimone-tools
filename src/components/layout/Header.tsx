@@ -78,15 +78,6 @@ export const Header = ({ onNavigateToTools }: HeaderProps) => {
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
             <ThemeToggle />
-            <Button 
-              variant="outline" 
-              className="border-primary/20 hover:border-primary hover:bg-primary/10"
-            >
-              Sign In
-            </Button>
-            <Button className="btn-hero">
-              Get Started
-            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -130,14 +121,6 @@ export const Header = ({ onNavigateToTools }: HeaderProps) => {
                     {item.name}
                   </motion.a>
                 ))}
-                <div className="px-3 py-2 space-y-2">
-                  <Button variant="outline" className="w-full">
-                    Sign In
-                  </Button>
-                  <Button className="w-full btn-hero">
-                    Get Started
-                  </Button>
-                </div>
               </div>
             </motion.div>
           )}

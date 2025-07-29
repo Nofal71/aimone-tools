@@ -26,7 +26,7 @@ export const ToolsSection = ({ searchFilter, onClearSearch }: ToolsSectionProps)
     search: searchFilter || '',
     category: 'All',
     pricing: 'All',
-    sortBy: 'rating'
+    sortBy: 'name'
   });
   
   const [viewMode, setViewMode] = useState<ViewMode>('card');
@@ -55,10 +55,8 @@ export const ToolsSection = ({ searchFilter, onClearSearch }: ToolsSectionProps)
       switch (filters.sortBy) {
         case 'name':
           return a.name.localeCompare(b.name);
-        case 'rating':
-          return (b.rating || 0) - (a.rating || 0);
-        case 'users':
-          return b.users?.localeCompare(a.users || '') || 0;
+        case 'category':
+          return a.category.localeCompare(b.category);
         default:
           return 0;
       }
@@ -97,7 +95,7 @@ export const ToolsSection = ({ searchFilter, onClearSearch }: ToolsSectionProps)
       )}
     >
       <Card className={cn(
-        "tool-card h-full cursor-pointer",
+        "tool-card h-full cursor-pointer flex flex-col",
         tool.isPremium && "border-primary/50"
       )}>
         <CardHeader className="pb-4">
@@ -115,23 +113,10 @@ export const ToolsSection = ({ searchFilter, onClearSearch }: ToolsSectionProps)
                 <p className="text-sm text-muted-foreground">{tool.purpose}</p>
               </div>
             </div>
-            
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon" className="opacity-0 group-hover:opacity-100 transition-opacity">
-                    <MoreHorizontal className="h-4 w-4" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>More options</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
           </div>
         </CardHeader>
 
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 flex-1 flex flex-col">
           <CardDescription className="text-sm leading-relaxed">
             {tool.description}
           </CardDescription>
@@ -149,24 +134,7 @@ export const ToolsSection = ({ searchFilter, onClearSearch }: ToolsSectionProps)
             )}
           </div>
 
-          <div className="flex items-center justify-between pt-2">
-            <div className="flex items-center space-x-4 text-sm text-muted-foreground">
-              {tool.rating && (
-                <div className="flex items-center">
-                  <Star className="h-3 w-3 fill-yellow-400 text-yellow-400 mr-1" />
-                  <span>{tool.rating}</span>
-                </div>
-              )}
-              {tool.users && (
-                <div className="flex items-center">
-                  <Users className="h-3 w-3 mr-1" />
-                  <span>{tool.users}</span>
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="flex space-x-2 pt-2">
+          <div className="flex space-x-2 pt-2 mt-auto">
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -253,14 +221,6 @@ export const ToolsSection = ({ searchFilter, onClearSearch }: ToolsSectionProps)
             </div>
           </div>
           <div className="flex items-center space-x-4">
-            <div className="text-right">
-              {tool.rating && (
-                <div className="flex items-center text-xs text-muted-foreground">
-                  <Star className="h-3 w-3 fill-yellow-400 text-yellow-400 mr-1" />
-                  <span>{tool.rating}</span>
-                </div>
-              )}
-            </div>
             <Button 
               size="sm"
               onClick={() => handleToolClick(tool.url)}

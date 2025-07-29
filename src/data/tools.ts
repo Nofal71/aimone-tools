@@ -11,9 +11,7 @@ export const aiTools: Tool[] = [
     category: 'Conversational AI',
     featured: true,
     isPremium: true,
-    tags: ['text-generation', 'coding', 'writing', 'conversation'],
-    rating: 4.8,
-    users: '100M+'
+    tags: ['text-generation', 'coding', 'writing', 'conversation']
   },
   {
     id: '2',
@@ -24,9 +22,7 @@ export const aiTools: Tool[] = [
     category: 'Image Generation',
     featured: true,
     isPremium: true,
-    tags: ['image-generation', 'art', 'creative', 'design'],
-    rating: 4.7,
-    users: '15M+'
+    tags: ['image-generation', 'art', 'creative', 'design']
   },
   {
     id: '3',
@@ -36,9 +32,7 @@ export const aiTools: Tool[] = [
     url: 'https://github.com/features/copilot',
     category: 'Development',
     featured: true,
-    tags: ['coding', 'development', 'programming', 'autocomplete'],
-    rating: 4.6,
-    users: '5M+'
+    tags: ['coding', 'development', 'programming', 'autocomplete']
   },
   {
     id: '4',
@@ -47,9 +41,7 @@ export const aiTools: Tool[] = [
     description: 'Advanced grammar checking, style suggestions, and writing enhancement. Improves clarity, tone, and correctness.',
     url: 'https://grammarly.com',
     category: 'Writing',
-    tags: ['writing', 'grammar', 'editing', 'proofreading'],
-    rating: 4.5,
-    users: '30M+'
+    tags: ['writing', 'grammar', 'editing', 'proofreading']
   },
   {
     id: '5',
@@ -58,9 +50,7 @@ export const aiTools: Tool[] = [
     description: 'Intelligent note-taking and workspace with AI writing assistance, content generation, and organization features.',
     url: 'https://notion.so',
     category: 'Productivity',
-    tags: ['productivity', 'note-taking', 'writing', 'organization'],
-    rating: 4.4,
-    users: '20M+'
+    tags: ['productivity', 'note-taking', 'writing', 'organization']
   },
   {
     id: '6',
@@ -69,9 +59,7 @@ export const aiTools: Tool[] = [
     description: 'Open-source text-to-image AI model. Generate high-quality images with complete control over the generation process.',
     url: 'https://stability.ai',
     category: 'Image Generation',
-    tags: ['image-generation', 'open-source', 'text-to-image'],
-    rating: 4.3,
-    users: '10M+'
+    tags: ['image-generation', 'open-source', 'text-to-image']
   },
   {
     id: '7',
@@ -81,9 +69,7 @@ export const aiTools: Tool[] = [
     url: 'https://jasper.ai',
     category: 'Content Creation',
     isPremium: true,
-    tags: ['content-creation', 'marketing', 'copywriting', 'blogging'],
-    rating: 4.2,
-    users: '1M+'
+    tags: ['content-creation', 'marketing', 'copywriting', 'blogging']
   },
   {
     id: '8',
@@ -93,9 +79,7 @@ export const aiTools: Tool[] = [
     url: 'https://runwayml.com',
     category: 'Video Generation',
     featured: true,
-    tags: ['video-generation', 'video-editing', 'creative', 'motion'],
-    rating: 4.4,
-    users: '2M+'
+    tags: ['video-generation', 'video-editing', 'creative', 'motion']
   },
   {
     id: '9',
@@ -104,9 +88,7 @@ export const aiTools: Tool[] = [
     description: 'Anthropic\'s AI assistant focused on being helpful, harmless, and honest. Excellent for analysis and reasoning tasks.',
     url: 'https://claude.ai',
     category: 'Conversational AI',
-    tags: ['conversation', 'analysis', 'reasoning', 'writing'],
-    rating: 4.6,
-    users: '5M+'
+    tags: ['conversation', 'analysis', 'reasoning', 'writing']
   },
   {
     id: '10',
@@ -115,9 +97,7 @@ export const aiTools: Tool[] = [
     description: 'AI-powered copywriting tool for marketing content, social media posts, emails, and sales copy generation.',
     url: 'https://copy.ai',
     category: 'Content Creation',
-    tags: ['copywriting', 'marketing', 'content-creation', 'social-media'],
-    rating: 4.1,
-    users: '3M+'
+    tags: ['copywriting', 'marketing', 'content-creation', 'social-media']
   },
   {
     id: '11',
@@ -126,9 +106,7 @@ export const aiTools: Tool[] = [
     description: 'Advanced AI voice cloning and text-to-speech technology. Create realistic voices for content creation.',
     url: 'https://elevenlabs.io',
     category: 'Audio Generation',
-    tags: ['voice-generation', 'text-to-speech', 'audio', 'cloning'],
-    rating: 4.5,
-    users: '1M+'
+    tags: ['voice-generation', 'text-to-speech', 'audio', 'cloning']
   },
   {
     id: '12',
@@ -137,9 +115,7 @@ export const aiTools: Tool[] = [
     description: 'AI-powered search engine that provides accurate answers with sources. Combines search with conversational AI.',
     url: 'https://perplexity.ai',
     category: 'Search',
-    tags: ['search', 'research', 'information', 'sources'],
-    rating: 4.3,
-    users: '10M+'
+    tags: ['search', 'research', 'information', 'sources']
   },
   {
     id: '13',
@@ -148,9 +124,7 @@ export const aiTools: Tool[] = [
     description: 'Automate workflows with AI. Connect apps and automate repetitive tasks using natural language commands.',
     url: 'https://zapier.com',
     category: 'Automation',
-    tags: ['automation', 'workflow', 'integration', 'productivity'],
-    rating: 4.4,
-    users: '5M+'
+    tags: ['automation', 'workflow', 'integration', 'productivity']
   },
   {
     id: '14',
@@ -159,9 +133,7 @@ export const aiTools: Tool[] = [
     description: 'AI-powered design tool with automatic design suggestions, background removal, and content generation.',
     url: 'https://canva.com',
     category: 'Design',
-    tags: ['design', 'graphics', 'templates', 'creative'],
-    rating: 4.7,
-    users: '100M+'
+    tags: ['design', 'graphics', 'templates', 'creative']
   },
   {
     id: '15',
@@ -170,9 +142,7 @@ export const aiTools: Tool[] = [
     description: 'AI-enhanced video recording with automatic transcription, summaries, and insights for better communication.',
     url: 'https://loom.com',
     category: 'Video Tools',
-    tags: ['video-recording', 'transcription', 'communication', 'summaries'],
-    rating: 4.5,
-    users: '15M+'
+    tags: ['video-recording', 'transcription', 'communication', 'summaries']
   }
 ];
 
@@ -201,6 +171,5 @@ export const pricingFilters = [
 
 export const sortOptions = [
   { value: 'name', label: 'Name' },
-  { value: 'rating', label: 'Rating' },
-  { value: 'users', label: 'Popularity' }
+  { value: 'category', label: 'Category' }
 ];

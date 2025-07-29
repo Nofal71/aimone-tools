@@ -10,8 +10,6 @@ export interface Tool {
   isPremium?: boolean;
   logo?: string;
   tags: string[];
-  rating?: number;
-  users?: string;
 }
 
 export interface ToolFilters {

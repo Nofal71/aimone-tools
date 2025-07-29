@@ -234,11 +234,8 @@ export const AskAISection = ({ onToolFound }: AskAISectionProps) => {
                                   <p className="text-muted-foreground text-sm mb-2">{foundTool.purpose}</p>
                                   <p className="text-sm mb-4">{foundTool.description}</p>
                                   
-                                  <div className="flex items-center justify-between">
-                                    <div className="text-sm font-medium text-primary">
-                                      {foundTool.pricing}
-                                    </div>
-                                    <div className="flex space-x-2">
+                                   <div className="flex items-center justify-end">
+                                     <div className="flex space-x-2">
                                       <Button
                                         size="sm"
                                         onClick={() => onToolFound(foundTool.id)}
