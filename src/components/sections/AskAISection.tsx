@@ -21,7 +21,7 @@ export const AskAISection = ({ onToolFound }: AskAISectionProps) => {
   const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState('');
-  const [foundTool, setFoundTool] = useState<Tool | null>(null);
+  const [foundTools, setFoundTools] = useState<Tool[]>([]);
   const [hasSearched, setHasSearched] = useState(false);
 
   const suggestions = [
@@ -42,15 +42,15 @@ export const AskAISection = ({ onToolFound }: AskAISectionProps) => {
       const result = await searchWithAI(query);
       setResponse(result.message);
 
-      if (result.id) {
-        const tool = aiTools.find(t => t.id === result.id);
-        setFoundTool(tool || null);
+      if (result.ids && result.ids.length > 0) {
+        const tools = result.ids.map(id => aiTools.find(t => t.id === id)).filter(Boolean) as Tool[];
+        setFoundTools(tools);
       } else {
-        setFoundTool(null);
+        setFoundTools([]);
       }
     } catch (error) {
       setResponse("I'm having trouble processing your request right now. Please try again or browse our tools manually.");
-      setFoundTool(null);
+      setFoundTools([]);
     } finally {
       setIsLoading(false);
     }
@@ -59,7 +59,7 @@ export const AskAISection = ({ onToolFound }: AskAISectionProps) => {
   const handleClear = () => {
     setQuery('');
     setResponse('');
-    setFoundTool(null);
+    setFoundTools([]);
     setHasSearched(false);
   };
 
@@ -204,8 +204,8 @@ export const AskAISection = ({ onToolFound }: AskAISectionProps) => {
                           <p className="text-foreground/90 leading-relaxed">{response}</p>
                         </div>
 
-                        {/* Recommended Tool */}
-                        {foundTool && (
+                        {/* Recommended Tools */}
+                        {foundTools.length > 0 && (
                           <motion.div
                             className="mt-6"
                             initial={{ opacity: 0, scale: 0.95 }}
@@ -215,45 +215,57 @@ export const AskAISection = ({ onToolFound }: AskAISectionProps) => {
                             <div className="bg-gradient-to-r from-primary/5 to-accent/5 border border-primary/20 rounded-xl p-6">
                               <div className="flex items-center space-x-2 mb-4">
                                 <Sparkles className="h-5 w-5 text-primary" />
-                                <h3 className="font-semibold text-primary">Recommended Tool</h3>
+                                <h3 className="font-semibold text-primary">
+                                  {foundTools.length === 1 ? 'Recommended Tool' : `${foundTools.length} Recommended Tools`}
+                                </h3>
                               </div>
                               
-                              <div className="flex items-start space-x-4">
-                                <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                                  <Bot className="h-6 w-6 text-white" />
-                                </div>
-                                <div className="flex-1">
-                                  <div className="flex items-center space-x-2 mb-2">
-                                    <h4 className="font-semibold text-lg">{foundTool.name}</h4>
-                                    {foundTool.isPremium && (
-                                      <Badge variant="secondary" className="bg-yellow-100 text-yellow-800">
-                                        Premium
-                                      </Badge>
-                                    )}
-                                  </div>
-                                  <p className="text-muted-foreground text-sm mb-2">{foundTool.purpose}</p>
-                                  <p className="text-sm mb-4">{foundTool.description}</p>
-                                  
-                                   <div className="flex items-center justify-end">
-                                     <div className="flex space-x-2">
-                                      <Button
-                                        size="sm"
-                                        onClick={() => onToolFound(foundTool.id)}
-                                        className="bg-gradient-to-r from-primary to-accent text-white"
-                                      >
-                                        <Search className="h-4 w-4 mr-2" />
-                                        View in Tools
-                                      </Button>
-                                      <Button
-                                        variant="outline"
-                                        size="sm"
-                                        onClick={() => window.open(foundTool.url, '_blank')}
-                                      >
-                                        Try Now
-                                      </Button>
+                              <div className="space-y-4">
+                                {foundTools.map((tool, index) => (
+                                  <motion.div
+                                    key={tool.id}
+                                    className="flex items-start space-x-4 p-4 rounded-lg bg-background/50 border border-border/20"
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                                  >
+                                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
+                                      <Bot className="h-6 w-6 text-white" />
                                     </div>
-                                  </div>
-                                </div>
+                                    <div className="flex-1">
+                                      <div className="flex items-center space-x-2 mb-2">
+                                        <h4 className="font-semibold text-lg">{tool.name}</h4>
+                                        {tool.isPremium && (
+                                          <Badge variant="secondary" className="bg-yellow-100 text-yellow-800">
+                                            Premium
+                                          </Badge>
+                                        )}
+                                      </div>
+                                      <p className="text-muted-foreground text-sm mb-2">{tool.purpose}</p>
+                                      <p className="text-sm mb-4">{tool.description}</p>
+                                      
+                                      <div className="flex items-center justify-end">
+                                        <div className="flex space-x-2">
+                                          <Button
+                                            size="sm"
+                                            onClick={() => onToolFound(tool.id)}
+                                            className="bg-gradient-to-r from-primary to-accent text-white"
+                                          >
+                                            <Search className="h-4 w-4 mr-2" />
+                                            View in Tools
+                                          </Button>
+                                          <Button
+                                            variant="outline"
+                                            size="sm"
+                                            onClick={() => window.open(tool.url, '_blank')}
+                                          >
+                                            Try Now
+                                          </Button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </motion.div>
+                                ))}
                               </div>
                             </div>
                           </motion.div>

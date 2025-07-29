@@ -21,5 +21,5 @@ export interface ToolFilters {
 
 export interface AISearchResponse {
   message: string;
-  id: string;
+  ids: string[];
 }

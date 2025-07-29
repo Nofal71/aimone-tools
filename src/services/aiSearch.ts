@@ -17,15 +17,15 @@ Category: ${tool.category}
 Tags: ${tool.tags.join(', ')}
 `).join('\n')}
 
-Based on the user's prompt, analyze what kind of tool they want. If it's a greeting or general message, respond with just a message. Otherwise, provide the ID of the most relevant tool from the given array.
+Based on the user's prompt, analyze what kind of tool they want. If it's a greeting or general message, respond with just a message. Otherwise, provide an array of the most relevant tool IDs from the given array (up to 3 tools maximum).
 
 You must respond in this exact JSON format:
 {
   "message": "Your response message here",
-  "id": "tool_id_if_relevant_or_empty_string"
+  "ids": ["tool_id_1", "tool_id_2", "tool_id_3"]
 }
 
-Be helpful and conversational in your message. If you find a relevant tool, explain why it matches their needs.`;
+Be helpful and conversational in your message. If you find relevant tools, explain why they match their needs. Return empty array if no relevant tools found.`;
 
     const response = await fetch(OPENROUTER_URL, {
       method: 'POST',
@@ -71,7 +71,7 @@ Be helpful and conversational in your message. If you find a relevant tool, expl
       // Fallback if JSON parsing fails
       return {
         message: "I'm here to help you find the perfect AI tool! Could you tell me more about what you're looking for?",
-        id: ""
+        ids: []
       };
     }
 
@@ -79,7 +79,7 @@ Be helpful and conversational in your message. If you find a relevant tool, expl
     console.error('AI Search Error:', error);
     return {
       message: "I'm experiencing some technical difficulties. Please try your search again or browse our tools manually.",
-      id: ""
+      ids: []
     };
   }
 }
