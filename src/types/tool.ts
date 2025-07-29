@@ -1,8 +1,8 @@
+
 export interface Tool {
   id: string;
   name: string;
   purpose: string;
-  pricing: string;
   description: string;
   url: string;
   category: string;

@@ -15,7 +15,6 @@ Purpose: ${tool.purpose}
 Description: ${tool.description}
 Category: ${tool.category}
 Tags: ${tool.tags.join(', ')}
-Pricing: ${tool.pricing}
 `).join('\n')}
 
 Based on the user's prompt, analyze what kind of tool they want. If it's a greeting or general message, respond with just a message. Otherwise, provide the ID of the most relevant tool from the given array.

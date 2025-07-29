@@ -47,12 +47,7 @@ export const ToolsSection = ({ searchFilter, onClearSearch }: ToolsSectionProps)
       
       const matchesCategory = filters.category === 'All' || tool.category === filters.category;
       
-      const matchesPricing = filters.pricing === 'All' || 
-                           (filters.pricing === 'Free' && tool.pricing.toLowerCase().includes('free')) ||
-                           (filters.pricing === 'Freemium' && tool.pricing.toLowerCase().includes('free') && tool.pricing.includes('/')) ||
-                           (filters.pricing === 'Paid' && !tool.pricing.toLowerCase().includes('free'));
-      
-      return matchesSearch && matchesCategory && matchesPricing;
+      return matchesSearch && matchesCategory;
     });
 
     // Sort tools
@@ -64,8 +59,6 @@ export const ToolsSection = ({ searchFilter, onClearSearch }: ToolsSectionProps)
           return (b.rating || 0) - (a.rating || 0);
         case 'users':
           return b.users?.localeCompare(a.users || '') || 0;
-        case 'pricing':
-          return a.pricing.localeCompare(b.pricing);
         default:
           return 0;
       }
@@ -87,6 +80,10 @@ export const ToolsSection = ({ searchFilter, onClearSearch }: ToolsSectionProps)
 
   const handleFilterChange = (key: keyof ToolFilters, value: string) => {
     setFilters(prev => ({ ...prev, [key]: value }));
+  };
+
+  const handleToolClick = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   const ToolCard = ({ tool, index }: { tool: Tool; index: number }) => (
@@ -167,16 +164,17 @@ export const ToolsSection = ({ searchFilter, onClearSearch }: ToolsSectionProps)
                 </div>
               )}
             </div>
-            <div className="text-sm font-medium text-primary">
-              {tool.pricing}
-            </div>
           </div>
 
           <div className="flex space-x-2 pt-2">
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button size="sm" className="flex-1">
+                  <Button 
+                    size="sm" 
+                    className="flex-1"
+                    onClick={() => handleToolClick(tool.url)}
+                  >
                     Try Now
                   </Button>
                 </TooltipTrigger>
@@ -189,7 +187,11 @@ export const ToolsSection = ({ searchFilter, onClearSearch }: ToolsSectionProps)
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button variant="outline" size="sm">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => handleToolClick(tool.url)}
+                  >
                     <ExternalLink className="h-4 w-4" />
                   </Button>
                 </TooltipTrigger>
@@ -217,8 +219,13 @@ export const ToolsSection = ({ searchFilter, onClearSearch }: ToolsSectionProps)
         </div>
         <h3 className="font-semibold mb-1">{tool.name}</h3>
         <p className="text-xs text-muted-foreground mb-2">{tool.purpose}</p>
-        <div className="text-xs font-medium text-primary mb-3">{tool.pricing}</div>
-        <Button size="sm" className="w-full">Try Now</Button>
+        <Button 
+          size="sm" 
+          className="w-full"
+          onClick={() => handleToolClick(tool.url)}
+        >
+          Try Now
+        </Button>
       </Card>
     </motion.div>
   );
@@ -247,7 +254,6 @@ export const ToolsSection = ({ searchFilter, onClearSearch }: ToolsSectionProps)
           </div>
           <div className="flex items-center space-x-4">
             <div className="text-right">
-              <div className="text-sm font-medium text-primary">{tool.pricing}</div>
               {tool.rating && (
                 <div className="flex items-center text-xs text-muted-foreground">
                   <Star className="h-3 w-3 fill-yellow-400 text-yellow-400 mr-1" />
@@ -255,7 +261,12 @@ export const ToolsSection = ({ searchFilter, onClearSearch }: ToolsSectionProps)
                 </div>
               )}
             </div>
-            <Button size="sm">Try Now</Button>
+            <Button 
+              size="sm"
+              onClick={() => handleToolClick(tool.url)}
+            >
+              Try Now
+            </Button>
           </div>
         </div>
       </Card>
@@ -317,17 +328,6 @@ export const ToolsSection = ({ searchFilter, onClearSearch }: ToolsSectionProps)
                 <SelectContent>
                   {categories.map(category => (
                     <SelectItem key={category} value={category}>{category}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              <Select value={filters.pricing} onValueChange={(value) => handleFilterChange('pricing', value)}>
-                <SelectTrigger className="w-40">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {pricingFilters.map(filter => (
-                    <SelectItem key={filter} value={filter}>{filter}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
